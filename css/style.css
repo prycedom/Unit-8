@@ -1,3 +1,10 @@
 .person {
     border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    grid-template-areas: 
+       "photo, firstName, lastName"
+       "photo, email, email"
+       "photo, city, city";
 }
