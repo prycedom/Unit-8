@@ -28,7 +28,7 @@ function displayPeople(people) {
 
         let personHtml = `
             <div class="person">
-                <img>${photo}<img>
+                <img>${photo}</img>
                 <p>${firstName} ${lastName}</p>
                 <p>${email}</p>
                 <p>${city}</p>
