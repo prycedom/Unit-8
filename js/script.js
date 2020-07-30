@@ -18,7 +18,7 @@ fetch('https://randomuser.me/api/?nat=us,ca,nz&results=12')
 
 function displayPeople(people) {    
     people.forEach(person => {
-        let photo = person.picture.thumbnail;
+        let photo = person.picture.medium;
         let firstName = person.name.first;
         let lastName = person.name.last;
         let email = person.email;
@@ -28,10 +28,10 @@ function displayPeople(people) {
 
         let personHtml = `
             <div class="person">
-                <img>${photo}</img>
-                <p>${firstName} ${lastName}</p>
-                <p>${email}</p>
-                <p>${city}</p>
+                <img class='photo' src=${photo}>
+                <p class='name'>${firstName} ${lastName}</p>
+                <p  class='email'>${email}</p>
+                <p class='city'>${city}</p>
             </div>
         `
 
