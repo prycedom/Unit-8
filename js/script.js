@@ -8,7 +8,7 @@ const modalContainer = document.querySelector(".modal-content");
 const modalClose = document.querySelector(".modal-close");
 
 
-fetch('https://randomuser.me/api/?nat=us,ca,nz&results=12')
+fetch(urlAPI)
     .then(response => {
         if(response.ok) {
             return response.json();
@@ -18,8 +18,7 @@ fetch('https://randomuser.me/api/?nat=us,ca,nz&results=12')
         }        
     })
     .then(data => {
-        
-        console.log(data);
+        employees = data.results;
         displayPeople(data.results);
     })
     .catch(err => {
@@ -27,7 +26,7 @@ fetch('https://randomuser.me/api/?nat=us,ca,nz&results=12')
     });
 
 function displayPeople(people) {    
-    people.forEach(person => {
+    people.forEach((person, index) => {
         let photo = person.picture.large;
         let firstName = person.name.first;
         let lastName = person.name.last;
@@ -35,7 +34,7 @@ function displayPeople(people) {
         let city = person.location.city;
 
         let personHtml = `
-            <div class="person">
+            <div class="person" data-index="${index}">
                 <img class='photo' src=${photo}>
                 <div class='person-detail'>
                     <p class='name'>${firstName} ${lastName}</p>
@@ -55,14 +54,14 @@ function displayModal(index) {
     }, picture } = employees[index];
     let date = new Date(dob.date);
     const modalHTML = `
-    <img class="avatar" src="${picture.large}" />
+    <img class="photo" src="${picture.large}" />
     <div class="text-container">
     <h2 class="name">${name.first} ${name.last}</h2>
     <p class="email">${email}</p>
     <p class="address">${city}</p>
     <hr />
     <p>${phone}</p>
-    <p class="address">${street}, ${state} ${postcode}</p>
+    <p class="address">${street.number} ${street.name}, ${state} ${postcode}</p>
     <p>Birthday:
     ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
     </div>
@@ -71,3 +70,17 @@ function displayModal(index) {
     modalContainer.innerHTML = modalHTML;
     }
     
+    grid.addEventListener('click', e => {
+        // make sure the click is not on the gridContainer itself
+        if (e.target !== grid) {
+        // select the card element based on its proximity to actual element
+        const card = e.target.closest(".person");
+        const index = card.getAttribute('data-index');
+        displayModal(index);
+        }
+        });
+
+    modalClose.addEventListener('click', () => {
+         overlay.classList.add("hidden");
+     });
+        

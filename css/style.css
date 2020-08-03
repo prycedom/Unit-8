@@ -57,7 +57,7 @@ body {
 
 /* Person */
 .person {
-    padding: 20px;
+    padding: 25px;
     border: 1px solid black;
     display: grid;
     grid-template-columns: auto 1fr;
@@ -66,6 +66,12 @@ body {
     grid-template-areas: 
        "photo detail";
 }
+
+.person:hover {
+    padding: 20px;
+    border: 6px solid black;
+}
+
 
 .person-detail {
     grid-area: detail;
