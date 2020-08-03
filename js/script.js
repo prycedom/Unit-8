@@ -1,3 +1,13 @@
+// global variables
+let employees = [];
+const urlAPI = `https://randomuser.me/api/?results=12&inc=name, picture,
+email, location, phone, dob &noinfo &nat=US`
+const grid = document.querySelector(".grid");
+const overlay = document.querySelector(".overlay");
+const modalContainer = document.querySelector(".modal-content");
+const modalClose = document.querySelector(".modal-close");
+
+
 fetch('https://randomuser.me/api/?nat=us,ca,nz&results=12')
     .then(response => {
         if(response.ok) {
@@ -24,8 +34,6 @@ function displayPeople(people) {
         let email = person.email;
         let city = person.location.city;
 
-        const grid = document.getElementById("grid");
-
         let personHtml = `
             <div class="person">
                 <img class='photo' src=${photo}>
@@ -40,3 +48,26 @@ function displayPeople(people) {
         grid.innerHTML += personHtml;
     });
 }
+
+function displayModal(index) {
+    // use object destructuring make our template literal cleaner
+    let { name, dob, phone, email, location: { city, street, state, postcode
+    }, picture } = employees[index];
+    let date = new Date(dob.date);
+    const modalHTML = `
+    <img class="avatar" src="${picture.large}" />
+    <div class="text-container">
+    <h2 class="name">${name.first} ${name.last}</h2>
+    <p class="email">${email}</p>
+    <p class="address">${city}</p>
+    <hr />
+    <p>${phone}</p>
+    <p class="address">${street}, ${state} ${postcode}</p>
+    <p>Birthday:
+    ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}</p>
+    </div>
+    `;
+    overlay.classList.remove("hidden");
+    modalContainer.innerHTML = modalHTML;
+    }
+    
