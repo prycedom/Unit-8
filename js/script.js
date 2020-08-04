@@ -1,4 +1,4 @@
-// global variables
+
 let employees = [];
 const urlAPI = `https://randomuser.me/api/?results=12&inc=name, picture,
 email, location, phone, dob &noinfo &nat=US`
@@ -26,7 +26,8 @@ fetch(urlAPI)
         console.log("Error: ", err);
     });
 
-function displayPeople(people) {    
+function displayPeople(people) {  
+    grid.innerHTML ="";  
     people.forEach((person, index) => {
         let photo = person.picture.large;
         let firstName = person.name.first;
@@ -50,7 +51,7 @@ function displayPeople(people) {
 }
 
 function displayModal(index) {
-    // use object destructuring make our template literal cleaner
+    
     let {
         name,
         dob,
@@ -108,9 +109,8 @@ function displayModal(index) {
 }
     
     grid.addEventListener('click', e => {
-        // make sure the click is not on the gridContainer itself
+       
         if (e.target !== grid) {
-        // select the card element based on its proximity to actual element
         const card = e.target.closest(".person");
         const index =parseInt(card.getAttribute('data-index'));
         displayModal(index);
@@ -120,4 +120,15 @@ function displayModal(index) {
     modalClose.addEventListener('click', () => {
          overlay.classList.add("hidden");
      });
-        
+      
+     
+     function search() {
+         let searchValue = document.getElementById('filter').value.toLowerCase();
+
+         let matchedEmployees = employees.filter(e => {
+             let name = `${e.name.first.toLowerCase()} ${e.name.last.toLowerCase}`;
+             return name.includes(searchValue);
+         });
+
+         displayPeople(matchedEmployees);
+     }

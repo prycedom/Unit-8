@@ -9,6 +9,10 @@ h1 {
     text-transform: uppercase;
     font-size: 1.5em;
 }
+
+.filter-container {
+    margin-bottom: 25px;
+}
 .grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
