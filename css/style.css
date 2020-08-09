@@ -15,7 +15,6 @@ h1 {
 }
 .grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-template-rows: 1fr 1fr 1fr 1fr;
     column-gap: 30px;
     row-gap: 30px;
