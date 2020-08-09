@@ -98,8 +98,20 @@ body {
 
 
 /* Break points */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 975px) {
     .grid {
-        grid-template-columns: minmax(300px, 1fr);
+        grid-template-columns: minmax(435px, 1fr);
+    }
+}
+
+@media only screen and (min-width: 975px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(435px, 1fr));
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .grid {
+        grid-template-columns: repeat(3, minmax(435px, 1fr));
     }
 }
