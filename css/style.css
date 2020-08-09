@@ -97,7 +97,30 @@ body {
 
 
 /* Break points */
-@media only screen and (max-width: 975px) {
+@media only screen and (max-width: 600px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .person {
+        padding: 25px;
+        border: 1px solid black;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr;
+        row-gap: 20px;
+        grid-template-areas: 
+           "photo"
+           "detail";
+        justify-items: center;
+    }
+
+    .person-detail {
+        justify-self: center;
+    }
+}
+
+@media only screen and (min-width: 975px) {
     .grid {
         grid-template-columns: minmax(435px, 1fr);
     }
